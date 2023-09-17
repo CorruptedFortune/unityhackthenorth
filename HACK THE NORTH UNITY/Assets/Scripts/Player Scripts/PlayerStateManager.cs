@@ -45,7 +45,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(currentState);
+        Debug.Log(desiredJump);
         currentState.UpdateState(this);
         float dir = InputController.RetrieveMoveInput();
         // get direction

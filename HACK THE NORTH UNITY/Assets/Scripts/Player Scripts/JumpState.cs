@@ -8,7 +8,8 @@ public class JumpState : PlayerBaseState
     public WalkState WalkState = new WalkState();
     public override void EnterState(PlayerStateManager state)
     {
-        state.desiredJump = true;
+        state.body.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        PlayerAnimationController.ChangeAnimationState("Player_Jump");
     }
 
     public override void UpdateState(PlayerStateManager state)
@@ -27,7 +28,6 @@ public class JumpState : PlayerBaseState
             JumpAction(state);
         }
         state.body.velocity = velocity;
-        state.SwitchState(state.AirState);
         #endregion
     }
     public void JumpAction(PlayerStateManager state)
@@ -46,6 +46,8 @@ public class JumpState : PlayerBaseState
             state.jumpSpeed = Mathf.Max(state.jumpSpeed - velocity.y, 0f);
             velocity.y += state.jumpSpeed;
             state.body.velocity = velocity;
+            state.body.constraints = RigidbodyConstraints2D.FreezeRotation;
+            state.SwitchState(state.AirState);
         }
 
     }
