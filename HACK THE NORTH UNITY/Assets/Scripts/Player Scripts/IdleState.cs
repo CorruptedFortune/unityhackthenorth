@@ -11,6 +11,8 @@ public class IdleState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager state)
     {
+        if (InputController.RetrieveJumpInput())
+            state.SwitchState(state.JumpState);
         if (InputController.RetrieveMoveInput() != 0)
             state.SwitchState(state.WalkState);
     }

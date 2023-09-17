@@ -8,4 +8,8 @@ public static class InputController
     {
         return Input.GetAxisRaw("Horizontal");
     }
+    public static bool RetrieveJumpInput()
+    {
+        return Input.GetButtonDown("Jump");
+    }
 }

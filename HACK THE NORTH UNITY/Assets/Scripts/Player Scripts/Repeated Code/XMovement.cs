@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class XMovement : MonoBehaviour
 {
-    public static void Move(float accel, float desiredVel, PlayerStateManager state)
+    public static float desiredVel;
+    public static void CalcVel(PlayerStateManager state)
     {
-
+        Vector2 vel = new Vector2(InputController.RetrieveMoveInput(), 0f) * state.maxVel;
+        desiredVel = vel.x;
+    }
+    public static void Move(float accel, PlayerStateManager state)
+    {
         Vector2 velocity1 = state.body.velocity;
         float acceleration1 = accel;
         float maxSpeedChange1 = acceleration1 * Time.deltaTime;

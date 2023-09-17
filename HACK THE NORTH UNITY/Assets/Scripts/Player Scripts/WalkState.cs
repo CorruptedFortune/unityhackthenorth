@@ -11,13 +11,22 @@ public class WalkState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager state)
     {
-        if(InputController.RetrieveMoveInput() == 0)
+        if (InputController.RetrieveJumpInput())
         {
-            XMovement.Move(state.accel, 0, state);
+            state.SwitchState(state.JumpState);
+            return;
+        }
+        else if(InputController.RetrieveMoveInput() == 0)
+        {
+            XMovement.desiredVel = 0;
+            XMovement.Move(state.accel, state);
             if (state.body.velocity.x == 0)
                 state.SwitchState(state.IdleState);
         }
         else
-            XMovement.Move(state.accel, state.maxVel, state);
+        {
+            XMovement.CalcVel(state);
+            XMovement.Move(state.accel, state);
+        }
     }
 }

@@ -14,10 +14,6 @@ public class PlayerAnimationController : MonoBehaviour
     }
     public static void ChangeAnimationState(string newState)
     {
-        float dir = InputController.RetrieveMoveInput();
-        // get direction
-        if (dir != 0)
-            transform.localScale = new Vector3(1 * dir, 1, 0);
         // stop same anim from playing
         if (currentAnimState == newState)
             return; // dont want to play anims cuz we dont have anims yet
